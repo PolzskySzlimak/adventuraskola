@@ -17,7 +17,6 @@ int main() {
     printf("\nVítáme vás, %s! Vaše parametry jsou - Síla: %d, Inteligence: %d, Mrštnost: %d\n\n",
         player.name, player.strength, player.intelligence, player.agility);
 
-    // Procházení jednotlivými lokacemi
     for (int i = 1; i <= MAX_LOCATION; i++) {
         locationAction(i, player);
     }
