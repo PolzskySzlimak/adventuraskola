@@ -1,6 +1,6 @@
 #ifndef LOCATION_H
 #define LOCATION_H
-##sdwae
+
 
 
 #include "game_utils.h"
@@ -103,7 +103,7 @@ void locationAction(int location, Character player) {
                 printf("Prohráváte souboj.\n");
 
                 if (player.strength > 7) {
-                    printf("Máte sílu vyšší než 7, získáváte druhý pokus!\n");
+                    printf("Máte sílu větší než 7, získáváte druhý pokus!\n");
                     printf("Stiskněte enter pro nový hod kostkou...\n");
                     getchar();
 
