@@ -125,30 +125,65 @@ void locationAction(int location, Character player) {
         printf("1. Najdi tajný vchod\n");
         printf("2. Vyřeš úlohu s prvočísly\n");
         printf("3. Pokračuj dále\n");
-        if (scanf_s("%d", &action) != 1) {
+        if (scanf("%d", &action) != 1) {
             printf("Neplatný vstup.\n");
             return;
         }
 
         if (action == 2) {
-            printf("Zadejte náhodně generované číslo: ");
-            int number;
-            if (scanf_s("%d", &number) != 1) {
-                printf("Neplatný vstup.\n");
+            int randomNumber = generateRandomNumber(10, 100);
+            printf("Vaše náhodně vygenerované číslo je: %d\n", randomNumber);
+            printf("Vaším úkolem je vypsat tři nejbližší prvočísla následující po tomto čísle.\n");
+
+            
+            if (player.intelligence > 5) {
+                printf("Nápověda: Prvočísla nejsou dělitelná žádným číslem kromě 1 a sebe samého.\n");
+            }
+
+            
+            int guesses[3];
+            printf("Zadejte tři prvočísla oddělená mezerou: ");
+            if (scanf("%d %d %d", &guesses[0], &guesses[1], &guesses[2]) != 3) {
+                printf("Neplatný vstup. Zkuste to znovu.\n");
                 return;
             }
 
-            if (player.intelligence > 5) {
-                printf("Nápověda: Zkuste se zaměřit na čísla, která nejsou dělitelná žádnými menšími čísly.\n");
+           
+            int correctPrimes[3];
+            int count = 0;
+            int candidate = randomNumber + 1;
+            while (count < 3) {
+                bool isPrime = true;
+                for (int i = 2; i * i <= candidate; i++) {
+                    if (candidate % i == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime) {
+                    correctPrimes[count++] = candidate;
+                }
+                candidate++;
             }
 
-            printf("Nejbližší tři prvočísla po %d jsou: ", number);
-            findNextPrimes(number);
-        }
-        break;
+            
+            bool allCorrect = true;
+            for (int i = 0; i < 3; i++) {
+                if (guesses[i] != correctPrimes[i]) {
+                    allCorrect = false;
+                    break;
+                }
+            }
 
-    default:
-        printf("Pokračujete do další lokace...\n");
+            if (allCorrect) {
+                printf("Výborně! Správná prvočísla jsou: %d, %d, %d. Pokračujete dále.\n",
+                    correctPrimes[0], correctPrimes[1], correctPrimes[2]);
+            }
+            else {
+                printf("Špatně! Správná prvočísla jsou: %d, %d, %d. Zkuste to znovu příště.\n",
+                    correctPrimes[0], correctPrimes[1], correctPrimes[2]);
+            }
+        }
         break;
     }
 }
