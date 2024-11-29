@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <locale.h>
 #include "character.h"
 #include "location.h"
 
-#define MAX_LOCATION 5
+#define MAX_LOCATION 4
 
 int main() {
-    setlocale(LC_ALL, "");
     srand((unsigned int)time(NULL));
 
-    printf("Vítejte v čarovném lese!\n\n");
+    printf("Vítejte v textové hře - adventura!\n\n");
     Character player = createCharacter();
 
     printf("\nVítáme, %s! Vaše parametry jsou - Síla: %d, Inteligence: %d, Mrštnost: %d\n\n",
@@ -21,6 +19,6 @@ int main() {
         locationAction(i, player);
     }
 
-    printf("\nGratulujeme, %s! Dokončili jsi hru!\n", player.name);
+    printf("\nGratulujeme, %s! Úspěšně jste dokončili hru!\n", player.name);
     return 0;
 }
