@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <locale.h>
@@ -21,6 +21,6 @@ int main() {
         locationAction(i, player);
     }
 
-    printf("\nGratulujeme, %s! Úspěšně jste dokončili hru!\n", player.name);
+    printf("\nGratulujeme, %s! Dokončili jsi hru!\n", player.name);
     return 0;
 }
