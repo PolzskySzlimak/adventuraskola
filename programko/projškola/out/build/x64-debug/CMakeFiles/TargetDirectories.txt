@@ -1,0 +1,5 @@
+C:/Users/pavel/Desktop/programko/projškola/out/build/x64-debug/CMakeFiles/edit_cache.dir
+C:/Users/pavel/Desktop/programko/projškola/out/build/x64-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/pavel/Desktop/programko/projškola/out/build/x64-debug/projškola/CMakeFiles/CMakeTarget.dir
+C:/Users/pavel/Desktop/programko/projškola/out/build/x64-debug/projškola/CMakeFiles/edit_cache.dir
+C:/Users/pavel/Desktop/programko/projškola/out/build/x64-debug/projškola/CMakeFiles/rebuild_cache.dir
