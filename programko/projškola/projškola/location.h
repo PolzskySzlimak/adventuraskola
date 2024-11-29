@@ -1,5 +1,7 @@
 #ifndef LOCATION_H
 #define LOCATION_H
+##sdwae
+
 
 #include "game_utils.h"
 #include "character.h"
@@ -11,11 +13,11 @@ void locationAction(int location, Character player) {
 
     switch (location) {
     case 1:
-        printf("1. Prohledej okolí\n");
-        printf("2. Pokus se otevøít truhlu (uhodni kód)\n");
-        printf("3. Pokraèuj dále\n");
+        printf("1. Prohledej okolÃ­\n");
+        printf("2. Pokus se otevÅ™Ã­t truhlu (uhodni kÃ³d)\n");
+        printf("3. PokraÄuj dÃ¡le\n");
         if (scanf_s("%d", &action) != 1) {
-            printf("Neplatnı vstup.\n");
+            printf("NeplatnÃ½ vstup.\n");
             return;
         }
 
@@ -24,69 +26,69 @@ void locationAction(int location, Character player) {
 
             if (player.intelligence > 7) {
                 if (correctCode > 5) {
-                    printf("Nápovìda: Moná byste se mìli zamìøit na vyšší èísla.\n");
+                    printf("NÃ¡povÄ›da: MoÅ¾nÃ¡ byste se mÄ›li zamÄ›Å™it na vyÅ¡Å¡Ã­ ÄÃ­sla.\n");
                 }
                 else {
-                    printf("Nápovìda: Moná byste se mìli zamìøit na niší èísla.\n");
+                    printf("NÃ¡povÄ›da: MoÅ¾nÃ¡ byste se mÄ›li zamÄ›Å™it na niÅ¾Å¡Ã­ ÄÃ­sla.\n");
                 }
             }
 
-            printf("Zadejte èíslo mezi 1 a 10: ");
+            printf("Zadejte ÄÃ­slo mezi 1 a 10: ");
             int guess;
             if (scanf_s("%d", &guess) != 1) {
-                printf("Neplatnı vstup.\n");
+                printf("NeplatnÃ½ vstup.\n");
                 return;
             }
             if (guess == correctCode) {
-                printf("Správnı kód! Truhla se otevírá a nacházíte poklad.\n");
+                printf("SprÃ¡vnÃ½ kÃ³d! Truhla se otevÃ­rÃ¡ a nachÃ¡zÃ­te poklad.\n");
             }
             else {
-                printf("Špatnì! Správnı kód byl %d.\n", correctCode);
+                printf("Å patnÄ›! SprÃ¡vnÃ½ kÃ³d byl %d.\n", correctCode);
             }
         }
         break;
 
     case 2:
         printf("1. Projdi se po lese\n");
-        printf("2. Vyøeš matematickou úlohu\n");
-        printf("3. Pokraèuj dále\n");
+        printf("2. VyÅ™eÅ¡ matematickou Ãºlohu\n");
+        printf("3. PokraÄuj dÃ¡le\n");
         if (scanf_s("%d", &action) != 1) {
-            printf("Neplatnı vstup.\n");
+            printf("NeplatnÃ½ vstup.\n");
             return;
         }
 
         if (action == 2) {
-            printf("Doplòte chybìjící èíslo v øadì: 2, 4, 6, ?\n");
+            printf("DoplÅˆte chybÄ›jÃ­cÃ­ ÄÃ­slo v Å™adÄ›: 2, 4, 6, ?\n");
 
             if (player.intelligence > 6) {
-                printf("Nápovìda: Hledejte pravidelnost ve zvìtšování èísel.\n");
+                printf("NÃ¡povÄ›da: Hledejte pravidelnost ve zvÄ›tÅ¡ovÃ¡nÃ­ ÄÃ­sel.\n");
             }
 
             int answer;
             if (scanf_s("%d", &answer) != 1) {
-                printf("Neplatnı vstup.\n");
+                printf("NeplatnÃ½ vstup.\n");
                 return;
             }
             if (answer == 8) {
-                printf("Správnì! Pokraèujete dále.\n");
+                printf("SprÃ¡vnÄ›! PokraÄujete dÃ¡le.\n");
             }
             else {
-                printf("Špatnì! Správná odpovìï byla 8.\n");
+                printf("Å patnÄ›! SprÃ¡vnÃ¡ odpovÄ›Ä byla 8.\n");
             }
         }
         break;
 
     case 3:
-        printf("1. Bojuj s protivníkem\n");
-        printf("2. Hledej zásoby\n");
-        printf("3. Pokraèuj dále\n");
+        printf("1. Bojuj s protivnÃ­kem\n");
+        printf("2. Hledej zÃ¡soby\n");
+        printf("3. PokraÄuj dÃ¡le\n");
         if (scanf_s("%d", &action) != 1) {
-            printf("Neplatnı vstup.\n");
+            printf("NeplatnÃ½ vstup.\n");
             return;
         }
 
         if (action == 1) {
-            printf("Stisknìte enter pro hod kostkou...\n");
+            printf("StisknÄ›te enter pro hod kostkou...\n");
             getchar();
             getchar();
 
@@ -95,24 +97,24 @@ void locationAction(int location, Character player) {
             printf("Hodili jste: %d\n", roll);
 
             if (roll >= 4) {
-                printf("Úder byl dostateènì silnı a vyhrál jsi souboj!\n");
+                printf("Ãšder byl dostateÄnÄ› silnÃ½ a vyhrÃ¡l jsi souboj!\n");
             }
             else {
-                printf("Prohráváte souboj.\n");
+                printf("ProhrÃ¡vÃ¡te souboj.\n");
 
                 if (player.strength > 7) {
-                    printf("Máte sílu vyšší ne 7, získáváte druhı pokus!\n");
-                    printf("Stisknìte enter pro novı hod kostkou...\n");
+                    printf("MÃ¡te sÃ­lu vyÅ¡Å¡Ã­ neÅ¾ 7, zÃ­skÃ¡vÃ¡te druhÃ½ pokus!\n");
+                    printf("StisknÄ›te enter pro novÃ½ hod kostkou...\n");
                     getchar();
 
                     roll = (rand() % 6) + 1;
                     printf("Hodili jste: %d\n", roll);
 
                     if (roll >= 4) {
-                        printf("Úder byl dostateènì silnı a vyhrál jsi souboj na druhı pokus!\n");
+                        printf("Ãšder byl dostateÄnÄ› silnÃ½ a vyhrÃ¡l jsi souboj na druhÃ½ pokus!\n");
                     }
                     else {
-                        printf("Prohráli jste souboj i na druhı pokus.\n");
+                        printf("ProhrÃ¡li jste souboj i na druhÃ½ pokus.\n");
                     }
                 }
             }
@@ -120,33 +122,33 @@ void locationAction(int location, Character player) {
         break;
 
     case 4:
-        printf("1. Najdi tajnı vchod\n");
-        printf("2. Vyøeš úlohu s prvoèísly\n");
-        printf("3. Pokraèuj dále\n");
+        printf("1. Najdi tajnÃ½ vchod\n");
+        printf("2. VyÅ™eÅ¡ Ãºlohu s prvoÄÃ­sly\n");
+        printf("3. PokraÄuj dÃ¡le\n");
         if (scanf_s("%d", &action) != 1) {
-            printf("Neplatnı vstup.\n");
+            printf("NeplatnÃ½ vstup.\n");
             return;
         }
 
         if (action == 2) {
-            printf("Zadejte náhodnì generované èíslo: ");
+            printf("Zadejte nÃ¡hodnÄ› generovanÃ© ÄÃ­slo: ");
             int number;
             if (scanf_s("%d", &number) != 1) {
-                printf("Neplatnı vstup.\n");
+                printf("NeplatnÃ½ vstup.\n");
                 return;
             }
 
             if (player.intelligence > 5) {
-                printf("Nápovìda: Zkuste se zamìøit na èísla, která nejsou dìlitelná ádnımi menšími èísly.\n");
+                printf("NÃ¡povÄ›da: Zkuste se zamÄ›Å™it na ÄÃ­sla, kterÃ¡ nejsou dÄ›litelnÃ¡ Å¾Ã¡dnÃ½mi menÅ¡Ã­mi ÄÃ­sly.\n");
             }
 
-            printf("Nejbliší tøi prvoèísla po %d jsou: ", number);
+            printf("NejbliÅ¾Å¡Ã­ tÅ™i prvoÄÃ­sla po %d jsou: ", number);
             findNextPrimes(number);
         }
         break;
 
     default:
-        printf("Pokraèujete do další lokace...\n");
+        printf("PokraÄujete do dalÅ¡Ã­ lokace...\n");
         break;
     }
 }
