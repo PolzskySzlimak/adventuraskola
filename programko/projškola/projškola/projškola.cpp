@@ -1,54 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <string.h>
 #include <locale.h>
 #include "character.h"
+#include "game_utils.h"
 #include "location.h"
-#include <string.h>
-#include <ctype.h>
-
-#define MAX_LOCATION 4
-
-void printGratulace(char* name) {
-    int nameLength = strlen(name);
-    char lastChar = tolower(name[nameLength - 1]);
-
-    if (lastChar == 'a') {
-        printf("\nGratulujeme, %s! Úspěšně jste dokončila hru!\n", name);
-    }
-    else {
-        char modifiedName[MAX_NAME_LENGTH];
-        strcpy(modifiedName, name);
-
-        if (lastChar == 'e' || lastChar == 'i' || lastChar == 'y') {
-            printf("\nGratulujeme, %s! Úspěšně jste dokončil hru!\n", name);
-        }
-        else {
-            if (nameLength > 1) {
-                modifiedName[nameLength - 1] = 'e';
-            }
-            else {
-                strcat(modifiedName, "e");
-            }
-            printf("\nGratulujeme, %s! Úspěšně jste dokončil hru!\n", modifiedName);
-        }
-    }
-}
 
 int main() {
     setlocale(LC_ALL, "");
-    srand((unsigned int)time(NULL));
 
-    printf("Vítejte v textové hře - adventura!\n\n");
-    Character player = createCharacter();
+    Character player;
 
-    printf("\nVítáme vás, %s! Vaše parametry jsou - Síla: %d, Inteligence: %d, Mrštnost: %d\n\n",
-        player.name, player.strength, player.intelligence, player.agility);
+    printf("Vítejte ve hře! Jak se jmenujete?\n");
+    fgets(player.name, sizeof(player.name), stdin);
+    player.name[strcspn(player.name, "\n")] = '\0';
 
-    for (int i = 1; i <= MAX_LOCATION; i++) {
-        locationAction(i, player);
+    player.strength = 5;
+    player.agility = 5;
+    player.intelligence = 5;
+    player.energy = 20;
+    initializeInventory(&player.inventory);
+    initializeTasks(player.tasksCompleted);
+
+    printf("Vítejte, %s! Vaše dobrodružství začíná...\n", player.name);
+
+    for (int i = 1; i <= 4; i++) {
+        locationAction(i, &player);
     }
 
-    printGratulace(player.name);
+    printf("\nGratulujeme, %s! Dokončili jste všechny lokace a zvítězili jste ve hře!\n", player.name);
     return 0;
 }
