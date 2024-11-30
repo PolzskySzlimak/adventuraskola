@@ -12,25 +12,33 @@ typedef struct {
 
 Character createCharacter() {
     Character player;
-    printf("Zadejte jméno vaší postavy: ");
-    if (scanf_s("%s", player.name, (unsigned)_countof(player.name)) != 1) {
-        printf("Chyba pøi ètení jména.\n");
+    printf("Zadejte jmÃ©no vaÅ¡Ã­ postavy: ");
+    if (scanf("%s", player.name) != 1) {
         player.name[0] = '\0';
     }
 
-    printf("Zvolte parametry vaší postavy:\n");
-    printf("1. Síla (1 - 10): ");
-    if (scanf_s("%d", &player.strength) != 1) {
-        player.strength = 1;
-    }
-    printf("2. Inteligence (1 - 10): ");
-    if (scanf_s("%d", &player.intelligence) != 1) {
-        player.intelligence = 1;
-    }
-    printf("3. Mrštnost (1 - 10): ");
-    if (scanf_s("%d", &player.agility) != 1) {
-        player.agility = 1;
-    }
+    printf("Zvolte parametry vaÅ¡Ã­ postavy (1-10):\n");
+
+    do {
+        printf("1. SÃ­la: ");
+        if (scanf("%d", &player.strength) != 1 || player.strength < 1 || player.strength > 10) {
+            player.strength = 1;
+        }
+    } while (player.strength < 1 || player.strength > 10);
+
+    do {
+        printf("2. Inteligence: ");
+        if (scanf("%d", &player.intelligence) != 1 || player.intelligence < 1 || player.intelligence > 10) {
+            player.intelligence = 1;
+        }
+    } while (player.intelligence < 1 || player.intelligence > 10);
+
+    do {
+        printf("3. MrÅ¡tnost: ");
+        if (scanf("%d", &player.agility) != 1 || player.agility < 1 || player.agility > 10) {
+            player.agility = 1;
+        }
+    } while (player.agility < 1 || player.agility > 10);
 
     return player;
 }
