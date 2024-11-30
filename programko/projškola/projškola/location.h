@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <locale.h>
 
 void locationAction(int location, Character* player) {
     printf("\n--- Jste v lokaci %d ---\n", location);
@@ -96,7 +95,7 @@ void locationAction(int location, Character* player) {
                 player->tasksCompleted[1][0] = 1;
             }
             else if (action == 2 && !player->tasksCompleted[1][1]) {
-                printf("Vyřešte hádanku: Co má zuby, ale nekouše?\n");
+                printf("Vyřešte hádanku: Co má zuby, ale nekouše? (Odpověď zadejte bez diakritiky)\n");
                 char answer[50];
                 printf("Vaše odpověď: ");
 
@@ -110,14 +109,6 @@ void locationAction(int location, Character* player) {
 
                 for (int i = 0; start[i]; i++) {
                     start[i] = tolower(start[i]);
-                    if (start[i] == 'ř') start[i] = 'r';
-                    if (start[i] == 'ě') start[i] = 'e';
-                    if (start[i] == 'š') start[i] = 's';
-                    if (start[i] == 'č') start[i] = 'c';
-                    if (start[i] == 'ý') start[i] = 'y';
-                    if (start[i] == 'á') start[i] = 'a';
-                    if (start[i] == 'í') start[i] = 'i';
-                    if (start[i] == 'é') start[i] = 'e';
                 }
 
                 if (strcmp(start, "hreben") == 0) {
@@ -125,11 +116,11 @@ void locationAction(int location, Character* player) {
                     player->tasksCompleted[1][1] = 1;
                 }
                 else {
-                    printf("Špatně. Správná odpověď je 'hřeben'. Zkuste to znovu.\n");
+                    printf("Špatně. Správná odpověď je 'hreben'. Zkuste to znovu.\n");
                 }
             }
             else if (action == 3 && !player->tasksCompleted[1][2]) {
-                printf("Překonáváte pasti...\n");
+                printf("Překonejte pasti...\n");
                 if (player->agility > 5) {
                     printf("Podařilo se! Pokračujete dál.\n");
                     player->tasksCompleted[1][2] = 1;
