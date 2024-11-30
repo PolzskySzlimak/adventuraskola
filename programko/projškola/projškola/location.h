@@ -6,104 +6,203 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void locationAction(int location, Character *player) {
+void locationAction(int location, Character* player) {
     printf("\n--- Jste v lokaci %d ---\n", location);
     int action = 0;
 
-    switch (location) {
-    case 1:
-        printf("1. Prohledejte okolí\n");
-        printf("2. Otevřete truhlu\n");
-        printf("3. Pokračujte dále\n");
-        if (scanf("%d", &action) != 1) {
-            return;
-        }
-        if (action == 2) {
-            printf("Otevíráte truhlu...\n");
-            addItemToInventory(&player->inventory, "Klíč");
-        }
-        break;
+    while (!(player->tasksCompleted[location - 1][0] &&
+        player->tasksCompleted[location - 1][1] &&
+        player->tasksCompleted[location - 1][2])) {
 
-    case 2:
-        printf("1. Hledejte zásoby\n");
-        printf("2. Vyřešte matematickou úlohu\n");
-        printf("3. Pokračujte dále\n");
-        if (scanf("%d", &action) != 1) {
-            printf("Neplatný vstup.\n");
-            return;
+        printf("Vyberte úkol:\n");
+        switch (location) {
+        case 1:
+            printf("1. Prohledejte okolí\n");
+            printf("2. Otevřete truhlu\n");
+            printf("3. Najděte stopy\n");
+            break;
+        case 2:
+            printf("1. Nasbírejte byliny\n");
+            printf("2. Vyřešte hádanku\n");
+            printf("3. Překonejte pasti\n");
+            break;
+        case 3:
+            printf("1. Bojujte s protivníkem\n");
+            printf("2. Použijte zbraň\n");
+            printf("3. Vyjednejte s protivníkem\n");
+            break;
+        case 4:
+            printf("1. Odemkněte tajný vchod\n");
+            printf("2. Vyřešte matematickou úlohu\n");
+            printf("3. Najděte skrytý průchod\n");
+            break;
         }
-        if (action == 1) {
-            printf("Našli jste lektvar síly!\n");
-            addItemToInventory(&player->inventory, "Lektvar síly");
-        } else if (action == 2) {
-            printf("Doplňte chybějící číslo v řadě: 2, 4, 6, ?\n");
-            int answer;
-            if (scanf("%d", &answer) != 1) {
-                printf("Neplatný vstup. Odpověď musí být číslo.\n");
-                return;
-            }
-            if (answer == 8) {
-                printf("Správně! Získali jste +1 inteligenci.\n");
-                player->intelligence += 1;
-            } else {
-                printf("Špatně! Správná odpověď byla 8.\n");
-            }
-        }
-        break;
 
-    case 3:
-        printf("1. Bojujte s protivníkem\n");
-        printf("2. Hledejte zásoby\n");
-        printf("3. Použijte předmět z inventáře\n");
         if (scanf("%d", &action) != 1) {
-            return;
+            printf("Neplatný vstup. Zadejte číslo úkolu.\n");
+            continue;
         }
-        if (action == 1) {
-            int roll = generateRandomNumber(1, 6);
-            printf("Hod kostkou: %d\n", roll);
-            if (roll >= 4) {
-                printf("Porazili jste protivníka!\n");
-            } else {
-                printf("Prohráli jste boj.\n");
-            }
-        } else if (action == 3) {
-            showInventory(player->inventory);
-            printf("Zadejte název předmětu, který chcete použít: ");
-            char item[MAX_NAME_LENGTH];
-            scanf("%s", item);
-            if (strcmp(item, "Meč") == 0 && hasItem(player->inventory, "Meč")) {
-                printf("Používáte meč a porážíte protivníka!\n");
-                useItem(&player->inventory, "Meč");
-            } else if (strcmp(item, "Lektvar síly") == 0 && hasItem(player->inventory, "Lektvar síly")) {
-                printf("Vypili jste lektvar a získali +2 sílu!\n");
-                player->strength += 2;
-                useItem(&player->inventory, "Lektvar síly");
-            } else {
-                printf("Nemáte tento předmět v inventáři.\n");
-            }
-        }
-        break;
 
-    case 4:
-        printf("1. Pokuste se odemknout tajný vchod\n");
-        printf("2. Hledejte další zásoby\n");
-        printf("3. Pokračujte dále\n");
-        if (scanf("%d", &action) != 1) {
-            return;
-        }
-        if (action == 1) {
-            if (hasItem(player->inventory, "Klíč")) {
-                printf("Použili jste klíč a odemkli tajný vchod!\n");
-                useItem(&player->inventory, "Klíč");
-            } else {
-                printf("Nemáte klíč. Hledejte ho v předchozích lokacích.\n");
+        switch (location) {
+        case 1:
+            if (action == 1 && !player->tasksCompleted[0][0]) {
+                printf("Prohledáváte okolí...\n");
+                if (generateRandomNumber(1, 2) == 1) {
+                    printf("Našli jste starou mapu!\n");
+                    addItemToInventory(&player->inventory, "Stará mapa");
+                }
+                else {
+                    printf("Nic jste nenašli, zkuste znovu.\n");
+                }
+                player->tasksCompleted[0][0] = 1;
             }
-        }
-        break;
+            else if (action == 2 && !player->tasksCompleted[0][1]) {
+                printf("Otevíráte truhlu: Kolik je 5 + 3?\n");
+                int answer;
+                scanf("%d", &answer);
+                if (answer == 8) {
+                    printf("Správně! Našli jste klíč.\n");
+                    addItemToInventory(&player->inventory, "Klíč");
+                    player->tasksCompleted[0][1] = 1;
+                }
+                else {
+                    printf("Špatně! Zkuste to znovu.\n");
+                }
+            }
+            else if (action == 3 && !player->tasksCompleted[0][2]) {
+                printf("Hledáte stopy...\n");
+                if (generateRandomNumber(1, 2) == 1) {
+                    printf("Našli jste stopy vedoucí do další oblasti.\n");
+                    player->tasksCompleted[0][2] = 1;
+                }
+                else {
+                    printf("Nic jste nenašli, zkuste to znovu.\n");
+                }
+            }
+            else {
+                printf("Tento úkol jste již splnili nebo zadání neplatí.\n");
+            }
+            break;
 
-    default:
-        break;
+        case 2:
+            if (action == 1 && !player->tasksCompleted[1][0]) {
+                printf("Nasbíráte byliny...\n");
+                addItemToInventory(&player->inventory, "Léčivá bylina");
+                player->tasksCompleted[1][0] = 1;
+            }
+            else if (action == 2 && !player->tasksCompleted[1][1]) {
+                printf("Vyřešte hádanku: Co roste, když je syto, a padá, když je hladové?\n");
+                char answer[20];
+                scanf("%s", answer);
+                if (strcmp(answer, "oheň") == 0) {
+                    printf("Správně! Pokračujete dál.\n");
+                    player->tasksCompleted[1][1] = 1;
+                }
+                else {
+                    printf("Špatně. Zkuste to znovu.\n");
+                }
+            }
+            else if (action == 3 && !player->tasksCompleted[1][2]) {
+                printf("Překonáváte pasti...\n");
+                if (player->agility > 5) {
+                    printf("Podařilo se! Pokračujete dál.\n");
+                    player->tasksCompleted[1][2] = 1;
+                }
+                else {
+                    printf("Past vás zdržela. Zkuste něco jiného.\n");
+                }
+            }
+            else {
+                printf("Tento úkol jste již splnili nebo zadání neplatí.\n");
+            }
+            break;
+
+        case 3:
+            if (action == 1 && !player->tasksCompleted[2][0]) {
+                printf("Bojujete s protivníkem...\n");
+                int roll = generateRandomNumber(1, 6);
+                printf("Hod kostkou: %d\n", roll);
+                if (roll >= 4) {
+                    printf("Porazili jste protivníka!\n");
+                    player->tasksCompleted[2][0] = 1;
+                }
+                else {
+                    printf("Prohráli jste boj. Zkuste to znovu.\n");
+                }
+            }
+            else if (action == 2 && !player->tasksCompleted[2][1]) {
+                printf("Používáte zbraň...\n");
+                if (hasItem(player->inventory, "Meč")) {
+                    printf("Mečem porážíte protivníka!\n");
+                    useItem(&player->inventory, "Meč");
+                    player->tasksCompleted[2][1] = 1;
+                }
+                else {
+                    printf("Nemáte vhodnou zbraň.\n");
+                }
+            }
+            else if (action == 3 && !player->tasksCompleted[2][2]) {
+                printf("Pokoušíte se vyjednat...\n");
+                if (player->intelligence > 6) {
+                    printf("Vyjednali jste mír! Pokračujete dál.\n");
+                    player->tasksCompleted[2][2] = 1;
+                }
+                else {
+                    printf("Vyjednávání selhalo. Zkuste jiný úkol.\n");
+                }
+            }
+            else {
+                printf("Tento úkol jste již splnili nebo zadání neplatí.\n");
+            }
+            break;
+
+        case 4:
+            if (action == 1 && !player->tasksCompleted[3][0]) {
+                printf("Odemykáte tajný vchod...\n");
+                if (hasItem(player->inventory, "Klíč")) {
+                    printf("Použili jste klíč a odemkli tajný vchod!\n");
+                    useItem(&player->inventory, "Klíč");
+                    player->tasksCompleted[3][0] = 1;
+                }
+                else {
+                    printf("Nemáte klíč.\n");
+                }
+            }
+            else if (action == 2 && !player->tasksCompleted[3][1]) {
+                printf("Vyřešte úlohu: Kolik je 9 * 3?\n");
+                int answer;
+                scanf("%d", &answer);
+                if (answer == 27) {
+                    printf("Správně! Pokračujete dál.\n");
+                    player->tasksCompleted[3][1] = 1;
+                }
+                else {
+                    printf("Špatně. Zkuste to znovu.\n");
+                }
+            }
+            else if (action == 3 && !player->tasksCompleted[3][2]) {
+                printf("Hledáte skrytý průchod...\n");
+                if (hasItem(player->inventory, "Stará mapa")) {
+                    printf("Díky mapě jste našli skrytý průchod!\n");
+                    useItem(&player->inventory, "Stará mapa");
+                    player->tasksCompleted[3][2] = 1;
+                }
+                else {
+                    printf("Nemáte mapu. Zkuste něco jiného.\n");
+                }
+            }
+            else {
+                printf("Tento úkol jste již splnili nebo zadání neplatí.\n");
+            }
+            break;
+
+        default:
+            printf("Neplatná volba.\n");
+            break;
+        }
     }
+
+    printf("Všechny úkoly v lokaci %d byly splněny! Pokračujete dál.\n", location);
 }
 
 #endif
