@@ -5,6 +5,9 @@
 #include "character.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <locale.h>
 
 void locationAction(int location, Character* player) {
     printf("\n--- Jste v lokaci %d ---\n", location);
@@ -40,8 +43,10 @@ void locationAction(int location, Character* player) {
 
         if (scanf("%d", &action) != 1) {
             printf("Neplatný vstup. Zadejte číslo úkolu.\n");
+            while (getchar() != '\n');
             continue;
         }
+        getchar();
 
         switch (location) {
         case 1:
@@ -91,15 +96,36 @@ void locationAction(int location, Character* player) {
                 player->tasksCompleted[1][0] = 1;
             }
             else if (action == 2 && !player->tasksCompleted[1][1]) {
-                printf("Vyřešte hádanku: Co roste, když je syto, a padá, když je hladové?\n");
-                char answer[20];
-                scanf("%s", answer);
-                if (strcmp(answer, "oheň") == 0) {
+                printf("Vyřešte hádanku: Co má zuby, ale nekouše?\n");
+                char answer[50];
+                printf("Vaše odpověď: ");
+
+                fgets(answer, sizeof(answer), stdin);
+
+                char* start = answer;
+                while (*start == ' ') start++;
+                char* end = start + strlen(start) - 1;
+                while (end > start && (*end == '\n' || *end == '\r' || *end == ' ')) end--;
+                *(end + 1) = '\0';
+
+                for (int i = 0; start[i]; i++) {
+                    start[i] = tolower(start[i]);
+                    if (start[i] == 'ř') start[i] = 'r';
+                    if (start[i] == 'ě') start[i] = 'e';
+                    if (start[i] == 'š') start[i] = 's';
+                    if (start[i] == 'č') start[i] = 'c';
+                    if (start[i] == 'ý') start[i] = 'y';
+                    if (start[i] == 'á') start[i] = 'a';
+                    if (start[i] == 'í') start[i] = 'i';
+                    if (start[i] == 'é') start[i] = 'e';
+                }
+
+                if (strcmp(start, "hreben") == 0) {
                     printf("Správně! Pokračujete dál.\n");
                     player->tasksCompleted[1][1] = 1;
                 }
                 else {
-                    printf("Špatně. Zkuste to znovu.\n");
+                    printf("Špatně. Správná odpověď je 'hřeben'. Zkuste to znovu.\n");
                 }
             }
             else if (action == 3 && !player->tasksCompleted[1][2]) {
