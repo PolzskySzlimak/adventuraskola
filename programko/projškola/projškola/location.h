@@ -49,8 +49,8 @@ void locationAction(int location, Character* player) {
         switch (location) {
         case 1:
             printf("1. Překonejte bažinu (povinné)\n");
-            printf("2. Nasbírejte dřevo (nepovinné - usnadní stavbu mostu)\n");
-            printf("3. Najděte meč (nepovinné - zjednoduší bojové úkoly)\n");
+            printf("2. Nasbírejte dřevo (nepovinné)\n");
+            printf("3. Najděte meč (nepovinné)\n");
             break;
         case 2:
             printf("1. Porazte nepřítele (povinné)\n");
@@ -59,13 +59,13 @@ void locationAction(int location, Character* player) {
             break;
         case 3:
             printf("1. Porazte strážce (povinné)\n");
-            printf("2. Prozkoumejte chodbu (nepovinné - najdete tajný vchod)\n");
-            printf("3. Najděte lektvar síly (nepovinné - zjednoduší bojové úkoly)\n");
+            printf("2. Prozkoumejte chodbu (nepovinné)\n");
+            printf("3. Najděte lektvar síly (nepovinné)\n");
             break;
         case 4:
             printf("1. Porazte draka (povinné)\n");
-            printf("2. Prohledejte dračí hnízdo (nepovinné - získáte tajný artefakt)\n");
-            printf("3. Otevřete tajnou truhlu (nepovinné - získáte zlatý poklad)\n");
+            printf("2. Prohledejte dračí hnízdo (nepovinné)\n");
+            printf("3. Otevřete tajnou truhlu (nepovinné)\n");
             break;
         }
 
@@ -80,7 +80,7 @@ void locationAction(int location, Character* player) {
             switch (location) {
             case 1: {
                 if (hasItem(&player->inventory, "Dřevo")) {
-                    printf("Dřevo z nepovinného úkolu vám pomohlo postavit most a překonat bažinu snadno.\n");
+                    printf("Dřevo vám pomohlo postavit most a překonat bažinu snadno.\n");
                     taskCompleted = 1;
                     break;
                 }
