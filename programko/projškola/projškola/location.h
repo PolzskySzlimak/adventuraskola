@@ -155,7 +155,6 @@ void locationAction(int location, Character* player) {
             }
         }
         else if (action == 2 || action == 3) {
-            // Nepovinné úkoly
             switch (location) {
             case 1:
                 if (action == 2) {
