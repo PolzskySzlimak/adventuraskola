@@ -10,7 +10,6 @@
 #include <locale.h>
 #include <time.h>
 
-// Funkce pro nalezení dalších tří prvočísel
 void findNextThreePrimes(int start, int primes[3]) {
     int count = 0, num = start + 1;
 
@@ -78,7 +77,6 @@ void locationAction(int location, Character* player) {
         getchar();
 
         if (action == 1) {
-            // Povinné úkoly
             switch (location) {
             case 1: {
                 if (hasItem(&player->inventory, "Dřevo")) {
