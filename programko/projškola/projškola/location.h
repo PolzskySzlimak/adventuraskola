@@ -54,8 +54,8 @@ void locationAction(int location, Character* player) {
             break;
         case 2:
             printf("1. Porazte nepřítele (povinné)\n");
-            printf("2. Nasbírejte léčivé byliny (nepovinné - snižují penalizaci)\n");
-            printf("3. Najděte drahokam (nepovinné - zvýší úspěšnost při logických úkolech)\n");
+            printf("2. Nasbírejte léčivé byliny (nepovinné)\n");
+            printf("3. Najděte drahokam (nepovinné)\n");
             break;
         case 3:
             printf("1. Porazte strážce (povinné)\n");
