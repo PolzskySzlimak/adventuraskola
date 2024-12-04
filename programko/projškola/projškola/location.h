@@ -1,8 +1,8 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include "game_utils.h"
-#include "character.h"
+#include <game_utils.h>
+#include <character.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
