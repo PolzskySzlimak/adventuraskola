@@ -1,7 +1,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "inventory.h"
+#include <inventory.h>
 
 typedef struct {
     char name[50];
