@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <character.h<
+#include <character.h>
 #include <game_utils.h>
 #include <location.h>
 
