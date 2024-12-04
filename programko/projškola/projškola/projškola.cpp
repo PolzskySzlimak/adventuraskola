@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "character.h"
-#include "game_utils.h"
-#include "location.h"
+#include <character.h<
+#include <game_utils.h>
+#include <location.h>
 
 void assignAttributes(Character* player) {
     int points = 15;
